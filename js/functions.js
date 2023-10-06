@@ -1,7 +1,4 @@
-function checkLength(str, length) {
-  if (str.length <= length){return true;}
-  else {return false;}
-}
+const checkLength = (str, length) => str.length <= length;
 
 checkLength('проверяемая строка', 20);
 checkLength('проверяемая строка', 18);
@@ -11,7 +8,9 @@ function checkPalindrome(str) {
   str = str.toLowerCase().replaceAll(' ', '');
   for (let i = 0; i < str.length / 2; i++) {
     const j = str.length - 1 - i;
-    if (str[i] !== str[j]) {return false;}
+    if (str[i] !== str[j]) {
+      return false;
+    }
   }
   return true;
 }
