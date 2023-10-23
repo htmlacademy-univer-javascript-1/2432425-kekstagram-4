@@ -1,3 +1,12 @@
+const URL = [];
+const PHOTOS_ID = [];
+const COMMENTS_ID = [];
+const NUMBER_OF_POSTS = 25;
+const MINIMUM_NUMBER_OF_COMMENTS = 1;
+const MAXIMUM_NUMBER_OF_COMMENTS = 30;
+const MINIMUM_NUMBER_OF_LIKES = 15;
+const MAXIMUM_NUMBER_OF_LIKES = 200;
+
 const TEXT_MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -6,7 +15,6 @@ const TEXT_MESSAGE = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
-
 const NAMES = [
   'Алексей',
   'Андрей',
@@ -15,8 +23,7 @@ const NAMES = [
   'Регина',
   'Татьяна'
 ];
-
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Тут должна была быть ваша реклама.',
   'Настроение — сложная штука. То оно есть, а то его нет.',
   'Я просто выгляжу как лось, а в душе я бабочка.',
@@ -31,7 +38,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-function getUniqNumberFromRange (min, max, array) {
+const getUniqNumberFromRange = (min, max, array) => {
   let currentValue = getRandomInteger(min, max);
   if (array.length >= (max - min + 1)) {
     return null;
@@ -41,34 +48,30 @@ function getUniqNumberFromRange (min, max, array) {
   }
   array.push(currentValue);
   return currentValue;
-}
+};
 
-const url = [];
-const photoId = [];
-const commentId = [];
-
-function getComments () {
+const getComments = () => {
   const comments = [];
-  const quantity = getRandomInteger(1, 30);
-  for (let i=0; i < quantity; i++){
+  const numberOfComments = getRandomInteger(MINIMUM_NUMBER_OF_COMMENTS, MAXIMUM_NUMBER_OF_COMMENTS);
+  for (let i=0; i < numberOfComments; i++){
     comments.push({
-      id: getUniqNumberFromRange(1, 100000, commentId),
+      id: getUniqNumberFromRange(1, 100000, COMMENTS_ID),
       avatar:`img/avatar-${getRandomInteger(1, 6)}.svg`,
       message: TEXT_MESSAGE[getRandomInteger(0, 5)],
       name: NAMES[getRandomInteger(0, 5)]
     });
   }
   return comments;
-}
+};
 
 function getPost(){
   return {
-    id: getUniqNumberFromRange(1, 25, photoId),
-    url: `photos/${getUniqNumberFromRange(1, 25, url)}.jpg`,
-    description: DESCRIPTION[getRandomInteger(0, 4)],
-    likes: getRandomInteger(15, 200),
+    id: getUniqNumberFromRange(1, 25, PHOTOS_ID),
+    url: `photos/${getUniqNumberFromRange(1, 25, URL)}.jpg`,
+    description: DESCRIPTIONS[getRandomInteger(0, 4)],
+    likes: getRandomInteger(MINIMUM_NUMBER_OF_LIKES, MAXIMUM_NUMBER_OF_LIKES),
     comments: getComments()
   };
 }
 
-const posts = Array.from({length: 25}, getPost);
+const posts = Array.from({length: NUMBER_OF_POSTS}, getPost);
