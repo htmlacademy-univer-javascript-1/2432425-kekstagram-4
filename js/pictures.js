@@ -1,25 +1,20 @@
-const pictures = document.querySelector('.pictures');
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.pictures');
+import {getPhotos} from './utils.js';
 
-const renderPhoto = ({url, description, comments, likes}) => {
-  const pictureElement = pictureTemplate.cloneCode(true);
+const pictureStorage = document.querySelector('.pictures');
+const pictureTemplate = document.querySelector('#picture').content;
 
-  pictureElement.querySelector('.picture_img').src = url;
-  pictureElement.querySelector('.picture_img').alt = description;
-  pictureElement.querySelector('.picture_comments').textContent = comments.length;
-  pictureElement.querySelector('.picture_likes').textContent = likes;
+const photos = getPhotos();
 
-  return pictureElement;
-};
+const pictureListFragment = document.createDocumentFragment();
 
-const renderPhotos = (photos) => {
-  const fragment = document.createDocumentFragment();
+photos.forEach(({url, description, likes, comments}) => {
+  const pictureElement = pictureTemplate.cloneNode(true);
 
-  photos.forEach((photo) => {
-    fragment.appendChild(renderPhoto(photo));
-  });
+  pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.querySelector('.picture__img').alt = description;
+  pictureElement.querySelector('.picture__likes').textContent = likes;
+  pictureElement.querySelector('.picture__comments').textContent = comments.length;
+  pictureListFragment.appendChild(pictureElement);
+});
 
-  pictures.appendChild(fragment);
-};
-
-export {renderPhotos};
+pictureStorage.appendChild(pictureListFragment);
