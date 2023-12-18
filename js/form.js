@@ -1,4 +1,5 @@
 import { disableSlider, onFilterChange, createSlider } from './effects.js';
+import { pristine } from './validate-form.js';
 
 const overlay = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
@@ -13,6 +14,9 @@ const buttonBigger = imageForm.querySelector('.scale__control--bigger');
 const scaleValue = imageForm.querySelector('.scale__control--value');
 const imagePreview = document.querySelector('.img-upload__preview img');
 const effectsField = document.querySelector('.img-upload__effects');
+
+const submitButton = document.querySelector('.img-upload__submit');
+const form = document.querySelector('.img-upload__form');
 
 const Zoom = {
   MIN: 25,
@@ -82,3 +86,23 @@ buttonBigger.addEventListener('click', (evt) => {
     changeZoom(coefficient);
   }
 });
+
+const toggleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  submitButton.textContent = isDisabled ? 'Отправляю...' : 'Опубликовать';
+};
+
+const setOnFormSubmit = (callback) => {
+  form.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      toggleSubmitButton(true);
+      await callback(new FormData(form));
+      toggleSubmitButton();
+    }
+  });
+};
+
+export {setOnFormSubmit, openFileForm, closeFileForm};
