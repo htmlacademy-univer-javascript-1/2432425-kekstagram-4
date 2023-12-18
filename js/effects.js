@@ -92,15 +92,10 @@ const EFFECT = {
 };
 
 const ImgForm = document.querySelector('.img-upload__form');
-
 const image = ImgForm.querySelector('.img-upload__preview img');
-
 const sliderValue = ImgForm.querySelector('.effect-level__value');
-
 const sliderWrapper = ImgForm.querySelector('.img-upload__effect-level');
-
 const slider = ImgForm.querySelector('.effect-level__slider');
-
 const effectsList = ImgForm.querySelector('.effects__list');
 
 const createSlider = () => {

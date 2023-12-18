@@ -40,4 +40,21 @@ const createPhotoDescription = () => ({
 
 const getPhotos = () => Array.from({length: getPhotosCount()}, createPhotoDescription);
 
-export {getPhotos};
+const showAlert = (message) => {
+  const alert = document.querySelector('.alert_message');
+  alert.style.position = 'absolute';
+  alert.style.zIndex = '100';
+  alert.style.left = '0';
+  alert.style.top = '0';
+  alert.style.right = '0';
+  alert.style.padding = '10px 3px';
+  alert.style.fontSize = '30px';
+  alert.style.textAlign = 'center';
+  alert.style.backgroundColor = 'red';
+  alert.textContent = message;
+
+  setTimeout(() => {
+    alert.remove();
+  }, 5000);
+};
+export {getPhotos, showAlert};
