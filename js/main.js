@@ -9,14 +9,17 @@ setOnFormSubmit (async (data) => {
     await sendData(data);
     closeFileForm();
     showSuccessMessage();
-  } catch {
+  } catch (err) {
     showErrorMessage();
   }
 });
 
-try {
-  const data = await getData();
-  renderGallery(data);
-} catch (err) {
-  showAlert(err.message);
-}
+const loadPictures = async () => {
+  try {
+    renderGallery(await getData());
+  } catch (err) {
+    showAlert(err.message);
+  }
+};
+
+loadPictures();
