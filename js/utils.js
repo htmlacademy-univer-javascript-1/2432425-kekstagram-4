@@ -57,4 +57,14 @@ const showAlert = (message) => {
     alert.remove();
   }, 5000);
 };
-export {getPhotos, showAlert};
+
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {getPhotos, showAlert, debounce};
