@@ -12,14 +12,16 @@ const createPictures = (({url, description, likes, comments, id}) => {
   return pictureElement;
 });
 
-const renderPictures = (pictures, cont) => {
+const renderPictures = (pictures, container) => {
+  container.querySelectorAll('.picture').forEach((element) => element.remove());
+
   const pictureListFragment = document.createDocumentFragment();
   pictures.forEach((item) => {
     const thumbnail = createPictures(item);
     pictureListFragment.append(thumbnail);
   });
 
-  cont.append(pictureListFragment);
+  container.append(pictureListFragment);
 };
 
 export {renderPictures};
