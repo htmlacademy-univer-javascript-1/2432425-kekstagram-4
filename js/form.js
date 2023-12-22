@@ -1,5 +1,6 @@
 import { disableSlider, onFilterChange, createSlider } from './effects.js';
 import { pristine } from './validate-form.js';
+import { showPreviewImg } from './upload-img.js';
 
 const overlay = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
@@ -60,9 +61,9 @@ closeForm.addEventListener('click', () => {
   closeFileForm();
 });
 
-uploadFile.addEventListener('change', (evt) => {
-  evt.preventDefault();
+uploadFile.addEventListener('change', () => {
   openFileForm();
+  showPreviewImg();
 });
 
 buttonSmaller.addEventListener('click', (evt) => {
