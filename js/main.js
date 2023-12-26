@@ -1,8 +1,8 @@
 import { sendData, getData } from './api.js';
-import { closeFileForm, setOnFormSubmit } from './form.js';
+import { closeFileForm, setOnFormSubmit } from './upload-form.js';
 import { renderGallery } from './gallery.js';
 import { showAlert } from './utils.js';
-import { showErrorMessage, showSuccessMessage } from './message.js';
+import { showErrorMessage, showSuccessMessage } from './result-messages.js';
 import { debounce } from './utils.js';
 import { initFilter, getFilteredPictures } from './filter.js';
 
@@ -23,6 +23,7 @@ setOnFormSubmit (async (data) => {
     closeFileForm();
     showSuccessMessage();
   } catch (err) {
+    closeFileForm();
     showErrorMessage();
   }
 });

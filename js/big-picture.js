@@ -1,3 +1,5 @@
+import { isEscapeKey } from './utils.js';
+
 const PART_OF_COMMENTS = 5;
 let commentsShown = 0;
 let comments = [];
@@ -44,12 +46,12 @@ const renderComments = () => {
 const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onDocumentKeyDown);
   commentsShown = 0;
 };
 
-function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape') {
+function onDocumentKeyDown(evt){
+  if(isEscapeKey(evt)){
     evt.preventDefault();
     hideBigPicture();
   }
@@ -72,7 +74,7 @@ const showBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   commentsLoaderElement.classList.add('hidden');
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeyDown);
 
   renderPictureDetails(data);
   comments = data.comments;
@@ -84,4 +86,4 @@ const showBigPicture = (data) => {
 cancelButtonElement.addEventListener('click', onCancelButtonClick);
 commentsLoaderElement.addEventListener('click', onCommentLoaderClick);
 
-export {showBigPicture, onDocumentKeydown};
+export {showBigPicture};

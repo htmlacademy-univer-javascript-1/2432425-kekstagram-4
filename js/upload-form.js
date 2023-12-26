@@ -1,6 +1,7 @@
 import { disableSlider, onFilterChange, createSlider } from './effects.js';
 import { pristine } from './validate-form.js';
 import { showPreviewImg } from './upload-img.js';
+import { isEscapeKey } from './utils.js';
 
 const overlay = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
@@ -44,7 +45,7 @@ const closeFileForm = () => {
 };
 
 function onDocumentKeydown (evt){
-  if (evt.key === 'Escape') {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeFileForm();
   }

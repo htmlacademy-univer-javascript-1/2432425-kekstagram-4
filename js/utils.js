@@ -1,4 +1,5 @@
 import {getPhotosCount, getIdsNum, getUrlsNum, getAvatarIdsNum, getLikesCount, getDescriptions, getCommentSentences, getCommentatorsNames} from './data.js';
+const ALERT_SHOW_TIME = 5000;
 
 const getRandomInteger = (first, last) => Math.ceil(Math.random() * (last - first + 1) + (first - 1));
 
@@ -41,7 +42,7 @@ const createPhotoDescription = () => ({
 const getPhotos = () => Array.from({length: getPhotosCount()}, createPhotoDescription);
 
 const showAlert = (message) => {
-  const alert = document.querySelector('.alert_message');
+  const alert = document.createElement('div');
   alert.style.position = 'absolute';
   alert.style.zIndex = '100';
   alert.style.left = '0';
@@ -53,9 +54,11 @@ const showAlert = (message) => {
   alert.style.backgroundColor = 'red';
   alert.textContent = message;
 
+  document.body.append(alert);
+
   setTimeout(() => {
     alert.remove();
-  }, 5000);
+  }, ALERT_SHOW_TIME);
 };
 
 function debounce (callback, timeoutDelay = 500) {
@@ -67,4 +70,7 @@ function debounce (callback, timeoutDelay = 500) {
   };
 }
 
+export const isEscapeKey = (evt) => evt.key === 'Escape';
+
 export {getPhotos, showAlert, debounce};
+
