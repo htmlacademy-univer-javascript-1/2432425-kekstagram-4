@@ -1,4 +1,4 @@
-const SERVER_URL = 'https://29.javascript.pages.academy/kekstagram';
+const SERVER_URL = 'https://29.javascript.pages.academy/kekstagramь';
 
 const ROUTE = {
   GET_DATA:'/data',
